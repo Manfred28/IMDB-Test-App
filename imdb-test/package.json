@@ -1,0 +1,19 @@
+{
+  "name": "imdb-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.20",
+    "next": "9.5.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "tachyons": "^4.12.0"
+  }
+}

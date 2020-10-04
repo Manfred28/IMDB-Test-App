@@ -1,0 +1,7 @@
+{
+  "name": "imdb-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "István Kozma <pisti_kozma@hotmail.com>",
+  "license": "MIT"
+}
