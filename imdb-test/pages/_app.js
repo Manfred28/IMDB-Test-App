@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import '../styles/globals.css';
+import Navbar from '../components/Navbar';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../styles/theme';
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }) {
           <title>IMDB Test App</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        <Navbar />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
