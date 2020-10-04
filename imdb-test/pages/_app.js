@@ -1,8 +1,9 @@
-import Head from 'next/head'
-import '../styles/globals.css';
+import Head from 'next/head';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import '../styles/globals.css';
 import theme from '../styles/theme';
 import 'tachyons/css/tachyons.min.css';
 
@@ -25,6 +26,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </>
   );
