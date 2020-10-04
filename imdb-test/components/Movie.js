@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import classnames from 'classnames';
 import { Markup } from 'interweave';
 import { IMDB_API_KEY } from '../constants/imdb';
@@ -15,20 +16,25 @@ function Movie({ movie }) {
   const classes = useStyles();
   const [wikiEntry, setWikiEntry] = useState(null);
   const [detailedMovie, setDetailedMovie] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const getDetails = () => {
     if (wikiEntry) return;
 
-    fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${IMDB_API_KEY}&language=en-US`)
-      .then((response) => response.json())
-      .then((data) => setDetailedMovie(data));
-
-    fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&prop=info&inprop=url&srsearch=${encodeURIComponent(
-        movie.title
-      )}`
-    )
-      .then((response) => response.json())
-      .then((data) => setWikiEntry(data.query.search[0]));
+    setIsLoading(true);
+    Promise.all([
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${IMDB_API_KEY}&language=en-US`
+      ),
+      fetch(
+        `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&prop=info&inprop=url&srsearch=${encodeURIComponent(
+          movie.title
+        )}`
+      ),
+    ]).then((results) => {
+      results[0].json().then((data) => setDetailedMovie(data));
+      results[1].json().then((data) => setWikiEntry(data.query.search[0]));
+      setIsLoading(false);
+    });
   };
 
   return (
@@ -43,6 +49,7 @@ function Movie({ movie }) {
         <span className="mr1 b">Original Language:</span>
         <span>{movie.original_language}</span>
       </div>
+      {isLoading && <CircularProgress />}
       {wikiEntry && (
         <div className="mt2">
           <Markup content={wikiEntry.snippet} containerTagName="span" />
