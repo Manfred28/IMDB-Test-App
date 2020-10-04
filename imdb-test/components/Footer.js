@@ -12,7 +12,7 @@ function Footer() {
 
   return (
     <footer
-      className={classnames('w-100 pl2 fixed bottom-0 bt h2 flex items-center', classes.root)}
+      className={classnames('w-100 fixed bottom-0 pl2 bt h2 flex items-center bg-white', classes.root)}
     >
       Created by István Kozma
     </footer>
