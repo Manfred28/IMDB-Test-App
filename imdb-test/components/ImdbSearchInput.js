@@ -6,20 +6,20 @@ import debounce from 'lodash/debounce';
 import { SearchContext } from '../providers/SearchProvider';
 
 function ImdbSearchInput() {
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const search = useContext(SearchContext);
 
   const onChange = useCallback(
     debounce((text) => {
       if (!text) return;
 
-      setIsloading(true);
+      setIsLoading(true);
       fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${IMDB_API_KEY}&language=en-US&page=1&include_adult=false&query=${text}`
       )
         .then((response) => response.json())
         .then((data) => search.setResults(data.results))
-        .then(() => setIsloading(false));
+        .then(() => setIsLoading(false));
     }, 500),
     []
   );
