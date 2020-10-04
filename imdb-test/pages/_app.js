@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SearchProvider from '../providers/SearchProvider';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import '../styles/globals.css';
@@ -19,14 +20,16 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Head>
-          <title>IMDB Test App</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
+        <SearchProvider>
+          <CssBaseline />
+          <Head>
+            <title>IMDB Test App</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </SearchProvider>
       </ThemeProvider>
     </>
   );
